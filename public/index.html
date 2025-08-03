@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Camva Pro CRM Dashboard</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/src/styles/base.css" />
+  <link rel="stylesheet" href="/src/styles/layout.css" />
+  <link rel="stylesheet" href="/src/styles/components.css" />
+  <link rel="stylesheet" href="/src/styles/utilities.css" />
+  <script src="https://kit.fontawesome.com/yourfontawesomekit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="header-left">
+        <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+        <div class="logo"><img src="/assets/logo.svg" alt="Logo"/>Camva Pro</div>
+      </div>
+      <div class="header-right">
+        <div id="connectionStatus" class="connection-status">
+          <div id="statusIndicator" class="status-indicator connecting"></div>
+          <span id="statusText">Connecting...</span>
+        </div>
+      </div>
+    </header>
 
+    <div class="main-container">
+      <aside id="sidebar" class="sidebar">
+        <nav class="nav-menu">
+          <a href="#" class="nav-item active" data-tab="dashboard"><i class="fas fa-chart-bar"></i>Dashboard</a>
+          <a href="#" class="nav-item" data-tab="add-customer"><i class="fas fa-user-plus"></i>Add Customer</a>
+          <a href="#" class="nav-item" data-tab="import-customer"><i class="fas fa-file-import"></i>Import Old</a>
+          <a href="#" class="nav-item" data-tab="renew"><i class="fas fa-sync-alt"></i>Renew</a>
+          <a href="#" class="nav-item" data-tab="search"><i class="fas fa-search"></i>Search</a>
+          <a href="#" class="nav-item" data-tab="expiring"><i class="fas fa-exclamation-triangle"></i>Expiring Soon</a>
+          <a href="#" class="nav-item" data-tab="reports"><i class="fas fa-chart-pie"></i>Reports</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content active">
+          <div class="page-header">
+            <h1><i class="fas fa-chart-bar"></i> Dashboard Overview</h1>
+            <p>Monitor your subscription business at a glance</p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-users"></i></div>
+              <div><div id="totalCustomers" class="stat-number">0</div><div class="stat-label">Total Customers</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon active"><i class="fas fa-check-circle"></i></div>
+              <div><div id="activeSubscriptions" class="stat-number">0</div><div class="stat-label">Active Subscriptions</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon warning"><i class="fas fa-clock"></i></div>
+              <div><div id="expiringSoon" class="stat-number">0</div><div class="stat-label">Expiring This Week</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon success"><i class="fas fa-rupee-sign"></i></div>
+              <div><div id="totalRevenue" class="stat-number">₹0</div><div class="stat-label">Total Revenue</div></div>
+            </div>
+          </div>
+          <div class="recent-activity">
+            <h2>Recent Activity</h2>
+            <div id="recentActivity" class="activity-list"></div>
+          </div>
+        </div>
+
+        <!-- Add Customer -->
+        <div id="add-customer" class="tab-content">
+          <div class="page-header"><h1><i class="fas fa-user-plus"></i> Add New Customer</h1><p>Create a new subscription</p></div>
+          <form id="addCustomerForm" class="form-container">
+            <div class="form-section">
+              <h3><i class="fas fa-user"></i> Customer Info</h3>
+              <div class="form-grid">
+                <div class="form-group"><label>Name *</label><input id="customerName" required/></div>
+                <div class="form-group"><label>Email *</label><input id="customerEmail" type="email" required/></div>
+                <div class="form-group"><label>Phone *</label><input id="customerPhone" required/></div>
+                <div class="form-group"><label>Team/Org</label><input id="customerTeam"/></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><i class="fas fa-box"></i> Subscription Details</h3>
+              <div class="form-grid">
+                <div class="form-group"><label>Plan *</label>
+                  <select id="subscriptionPlan" required>
+                    <option value="">Select</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="annual">Annual</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Payment *</label>
+                  <select id="paymentAmount" required>
+                    <option value="">Select</option>
+                    <option value="49">₹49</option>
+                    <option value="99">₹99</option>
+                    <option value="299">₹299</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions"><button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Add & Welcome</button></div>
+          </form>
+        </div>
+
+        <!-- Import Customer -->
+        <div id="import-customer" class="tab-content">
+          <div class="page-header"><h1><i class="fas fa-file-import"></i> Import Old Customer</h1><p>Manual dates for historical subscriptions</p></div>
+          <form id="importCustomerForm" class="form-container">
+            <div class="form-section">
+              <h3><i class="fas fa-user"></i> Customer Info</h3>
+              <div class="form-grid">
+                <div class="form-group"><label>Name *</label><input id="importName" required/></div>
+                <div class="form-group"><label>Email *</label><input id="importEmail" type="email" required/></div>
+                <div class="form-group"><label>Phone *</label><input id="importPhone" required/></div>
+                <div class="form-group"><label>Team/Org</label><input id="importTeam"/></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><i class="fas fa-box"></i> Plan Details</h3>
+              <div class="form-grid">
+                <div class="form-group"><label>Plan *</label>
+                  <select id="importPlan" required>
+                    <option value="">Select</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="annual">Annual</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Payment *</label><input id="importPayment" type="number" required/></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><i class="fas fa-calendar"></i> Dates</h3>
+              <div class="form-grid">
+                <div class="form-group"><label>Joined *</label><input id="joinedDate" type="date" required/></div>
+                <div class="form-group"><label>Reminder *</label><input id="reminderDate" type="date" required/></div>
+                <div class="form-group"><label>Expiry *</label><input id="expiryDate" type="date" required/></div>
+              </div>
+            </div>
+            <div class="form-actions"><button class="btn btn-primary"><i class="fas fa-file-import"></i> Import</button></div>
+            <div class="message-actions">
+              <h4><i class="fas fa-paper-plane"></i> After Import</h4>
+              <div class="message-buttons">
+                <button id="sendImportWhatsApp" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i></button>
+                <button id="sendImportEmail" class="btn btn-email"><i class="fas fa-envelope"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Renew -->
+        <div id="renew" class="tab-content">
+          <div class="page-header"><h1><i class="fas fa-sync-alt"></i> Renew Subscription</h1></div>
+          <form id="renewForm" class="form-container">
+            <div class="form-section">
+              <h3><i class="fas fa-search"></i> Find Customer</h3>
+              <div class="form-group"><label>Phone or Email *</label><input id="renewIdentifier" required/></div>
+            </div>
+            <div class="form-section">
+              <h3><i class="fas fa-sync-alt"></i> Renewal Details</h3>
+              <div class="form-grid">
+                <div class="form-group"><label>New Plan *</label>
+                  <select id="renewPlan" required>
+                    <option value="">Select</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="annual">Annual</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Payment *</label>
+                  <select id="renewPayment" required>
+                    <option value="">Select</option>
+                    <option value="49">₹49</option>
+                    <option value="99">₹99</option>
+                    <option value="299">₹299</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions"><button class="btn btn-primary"><i class="fas fa-sync-alt"></i> Renew</button></div>
+            <div class="message-actions">
+              <h4><i class="fas fa-paper-plane"></i> Renewal Messages</h4>
+              <div class="message-buttons">
+                <button id="sendRenewalWhatsApp" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i></button>
+                <button id="sendRenewalEmail" class="btn btn-email"><i class="fas fa-envelope"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Search -->
+        <div id="search" class="tab-content">
+          <div class="page-header"><h1><i class="fas fa-search"></i> Search Customers</h1></div>
+          <form id="searchForm" class="search-form">
+            <div class="search-input-group">
+              <input id="searchQuery" placeholder="Search by name, email, phone..." required/>
+              <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+          </form>
+          <div id="searchResults" class="search-results"></div>
+        </div>
+
+        <!-- Expiring -->
+        <div id="expiring" class="tab-content">
+          <div class="page-header"><h1><i class="fas fa-exclamation-triangle"></i> Expiring This Week</h1></div>
+          <div class="expiring-actions">
+            <button id="refreshExpiring" class="btn btn-secondary"><i class="fas fa-sync-alt"></i> Refresh</button>
+            <button id="bulkWhatsApp" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Bulk WA</button>
+            <button id="bulkEmail" class="btn btn-email"><i class="fas fa-envelope"></i> Bulk Email</button>
+          </div>
+          <div id="expiringList" class="expiring-list"></div>
+        </div>
+
+        <!-- Reports -->
+        <div id="reports" class="tab-content">
+          <div class="page-header"><h1><i class="fas fa-chart-pie"></i> Reports & Exports</h1></div>
+          <div class="report-actions">
+            <button id="exportAllCustomers" class="btn btn-primary"><i class="fas fa-download"></i> Export All CSV</button>
+            <button id="exportSearchResults" class="btn btn-secondary"><i class="fas fa-download"></i> Export Search CSV</button>
+            <button id="generateMonthlyReport" class="btn btn-info"><i class="fas fa-file-alt"></i> Monthly Report</button>
+            <button id="generateExpiryReport" class="btn btn-warning"><i class="fas fa-file-alt"></i> Expiry Report</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <div id="loadingOverlay" class="loading-overlay"><div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Processing...</p></div></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script type="module" src="/src/scripts/main.js"></script>
+</body>
+</html>
