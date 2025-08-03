@@ -1,0 +1,118 @@
+/* components.css: cards, forms, buttons, toasts */
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  align-items: center;
+  transition: transform 0.2s;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  font-size: 1.75rem;
+  color: var(--primary);
+}
+
+.stat-number {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+}
+
+.form-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--border);
+  color: var(--text);
+}
+.btn-whatsapp {
+  background: #25d366;
+  color: white;
+}
+.btn-email {
+  background: #4285f4;
+  color: white;
+}
+
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2000;
+}
+
+.toast {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
