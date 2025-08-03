@@ -1,0 +1,19 @@
+<div class="expiring-card">
+  <div class="expiring-info">
+    <h4>{{name}}</h4>
+    <p><strong>Plan:</strong> {{plan}}</p>
+    <p><strong>Expiry:</strong> {{expiryDate}} ({{daysLeft}} days left)</p>
+    <p><strong>Contact:</strong> {{phone}}</p>
+  </div>
+  <div class="expiring-actions-group">
+    <button class="btn btn-primary" onclick="renewSubscription('{{id}}')">
+      <i class="fas fa-sync-alt"></i> Renew
+    </button>
+    <button class="btn btn-whatsapp" onclick="sendWhatsApp('{{phone}}','{{reminderWaMessage}}')">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </button>
+    <button class="btn btn-email" onclick="sendEmail('{{email}}','{{reminderEmailSubject}}','{{reminderEmailBody}}')">
+      <i class="fas fa-envelope"></i> Email
+    </button>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="customer-card">
+  <div class="customer-info">
+    <h4>{{name}}</h4>
+    <p><strong>Email:</strong> {{email}}</p>
+    <p><strong>Phone:</strong> {{phone}}</p>
+    <p><strong>Team:</strong> {{team}}</p>
+    <p><strong>Plan:</strong> {{plan}}</p>
+    <p><strong>Joined:</strong> {{joinedDate}}</p>
+    <p><strong>Expires:</strong> {{expiryDate}}</p>
+    <span class="status-badge {{statusClass}}">{{statusText}}</span>
+  </div>
+  <div class="customer-actions">
+    <button class="btn btn-whatsapp" onclick="sendWhatsApp('{{phone}}','{{waMessage}}')">
+      <i class="fab fa-whatsapp"></i>
+    </button>
+    <button class="btn btn-email" onclick="sendEmail('{{email}}','{{emailSubject}}','{{emailBody}}')">
+      <i class="fas fa-envelope"></i>
+    </button>
+  </div>
+</div>
